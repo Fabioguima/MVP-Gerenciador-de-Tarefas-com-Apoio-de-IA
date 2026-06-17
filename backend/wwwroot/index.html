@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MVP Gerenciador de Tarefas com IA</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="panel">
+      <div class="heading">
+        <p>Gerenciador de Tarefas com Apoio de IA</p>
+        <h1>Tarefas, prioridades e sugestoes em um fluxo simples.</h1>
+      </div>
+
+      <form id="category-form" class="row-form">
+        <input id="category-name" placeholder="Nova categoria" required>
+        <input id="category-color" type="color" value="#2563eb" aria-label="Cor da categoria">
+        <button type="submit">Adicionar categoria</button>
+      </form>
+
+      <form id="task-form" class="task-form">
+        <input id="task-title" placeholder="Titulo da tarefa" required>
+        <textarea id="task-description" placeholder="Descricao"></textarea>
+        <select id="task-priority">
+          <option value="Baixa">Baixa</option>
+          <option value="Media" selected>Media</option>
+          <option value="Alta">Alta</option>
+        </select>
+        <select id="task-category"></select>
+        <input id="task-date" type="date">
+        <button type="submit">Criar tarefa</button>
+      </form>
+    </section>
+
+    <section class="toolbar">
+      <select id="filter-status">
+        <option value="">Todos os status</option>
+        <option value="Pendente">Pendente</option>
+        <option value="EmAndamento">Em andamento</option>
+        <option value="Concluida">Concluida</option>
+        <option value="Cancelada">Cancelada</option>
+      </select>
+      <select id="filter-priority">
+        <option value="">Todas as prioridades</option>
+        <option value="Baixa">Baixa</option>
+        <option value="Media">Media</option>
+        <option value="Alta">Alta</option>
+      </select>
+      <button id="ai-prioritize" type="button">Priorizar com IA</button>
+    </section>
+
+    <section id="tasks" class="tasks"></section>
+
+    <section class="panel">
+      <form id="ai-form" class="row-form">
+        <input id="ai-goal" placeholder="Objetivo para a IA sugerir tarefas">
+        <button type="submit">Gerar sugestoes</button>
+      </form>
+      <ul id="ai-output" class="ai-output"></ul>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

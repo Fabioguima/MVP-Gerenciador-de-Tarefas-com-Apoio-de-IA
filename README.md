@@ -1,45 +1,51 @@
-# Planejamento Inicial - Trabalho Pratico
+﻿# Planejamento Inicial - Trabalho Pratico
 
 ## MVP: Gerenciador de Tarefas com Apoio de IA
 
-### 1. Integrante(s)
+## 1. Integrante
 
-- Nome: Fabio Guimarães
+- Nome: Fabio Guimaraes
 - Desenvolvimento: individual
 
-### 2. Tecnologias Escolhidas
+## 2. Tecnologias Escolhidas
 
 Para o desenvolvimento do MVP, foram escolhidas tecnologias simples, produtivas e adequadas para a criacao rapida de uma aplicacao funcional.
 
-- Front-end: React
-- Back-end: C# com ASP.NET
-- Banco de dados: PostgreSQL
-- IA de apoio ao desenvolvimento: ChatGPT / Codex
-- IA dentro da aplicacao: API da OpenAI, para sugestao de tarefas, organizacao de prioridades e geracao de resumos
-- Versionamento: Git e GitHub
+### Implementado no MVP atual
 
-### 3. Arquitetura Proposta
+- Front-end: HTML, CSS e JavaScript servidos pela propria API ASP.NET Core
+- Back-end: C# com ASP.NET Core usando Minimal APIs
+- Banco de dados: repositorio em memoria, para facilitar execucao local e testes automatizados
+- IA de apoio ao desenvolvimento: ChatGPT / Codex
+- IA dentro da aplicacao: servico de IA simulado, com sugestao de tarefas, priorizacao, melhoria de descricao e registro das interacoes
+- Testes: runner automatizado em C# com teste unitario, teste de integracao e teste E2E
+
+## 3. Arquitetura Proposta
 
 A aplicacao sera organizada em uma arquitetura cliente-servidor, separando a interface do usuario, a API e a camada de dados.
 
-O front-end sera responsavel pela experiencia do usuario, exibicao das tarefas, filtros, formularios e interacoes com os recursos de IA. Ele se comunicara com o back-end por meio de requisicoes HTTP/REST.
+O front-end sera responsavel pela experiencia do usuario, exibindo tarefas, filtros, formularios e interacoes com os recursos de IA. Ele se comunica com o back-end por meio de requisicoes HTTP/REST.
 
-O back-end sera responsavel pelas regras de negocio, autenticacao, validacao dos dados, integracao com o banco de dados e chamadas para a API de IA. A API tambem centralizara operacoes como criacao, edicao, conclusao, exclusao e consulta de tarefas.
+O back-end sera responsavel pelas regras de negocio, validacao de dados, integracao com a camada de dados e chamadas para o servico de IA. A API tambem centraliza operacoes como criacao, edicao, conclusao, exclusao e consulta de tarefas.
 
-O banco de dados armazenara usuarios, tarefas, categorias, historico de interacoes com IA e metadados importantes para acompanhamento do uso da aplicacao.
+O banco de dados armazena usuarios, tarefas, categorias, historico de interacoes com IA e metadados importantes para acompanhamento do uso da aplicacao.
+
+### Como ficou no MVP atual
+
+No MVP implementado, o front-end fica na pasta `backend/wwwroot` e e servido pela propria API ASP.NET Core. A camada de dados foi implementada com um repositorio em memoria chamado `InMemoryTaskRepository`.
 
 Fluxo geral:
 
 1. Usuario acessa o sistema pelo front-end.
 2. Front-end envia requisicoes para a API.
 3. API valida os dados e executa regras de negocio.
-4. API consulta ou atualiza o banco de dados.
-5. Quando necessario, a API envia uma solicitacao para o servico de IA.
+4. API consulta ou atualiza o repositorio de dados.
+5. Quando necessario, a API envia uma solicitacao para o servico de IA simulado.
 6. A resposta e retornada ao front-end e exibida ao usuario.
 
-### 4. Modelagem Inicial das Entidades
+## 4. Modelagem I das Entidades
 
-#### Usuario
+### Usuario
 
 Representa a pessoa que utiliza o sistema.
 
@@ -50,7 +56,7 @@ Representa a pessoa que utiliza o sistema.
 - data_criacao
 - data_atualizacao
 
-#### Tarefa
+### Tarefa
 
 Representa uma atividade cadastrada pelo usuario.
 
@@ -68,10 +74,10 @@ Representa uma atividade cadastrada pelo usuario.
 
 Status previstos:
 
-- pendente
-- em_andamento
-- concluida
-- cancelada
+- `Pendente`
+- `EmAndamento`
+- `Concluida`
+- `Cancelada`
 
 Prioridades previstas:
 
@@ -79,7 +85,13 @@ Prioridades previstas:
 - media
 - alta
 
-#### Categoria
+No codigo, as prioridades foram implementadas como enum:
+
+- `Baixa`
+- `Media`
+- `Alta`
+
+### Categoria
 
 Permite organizar tarefas por area ou contexto.
 
@@ -89,7 +101,7 @@ Permite organizar tarefas por area ou contexto.
 - cor
 - criada_em
 
-#### InteracaoIA
+### InteracaoIA
 
 Registra o uso da IA dentro do sistema e tambem apoia a analise critica exigida no trabalho.
 
@@ -103,71 +115,186 @@ Registra o uso da IA dentro do sistema e tambem apoia a analise critica exigida 
 
 Tipos de interacao previstos:
 
-- sugestao_tarefa
-- priorizacao
-- resumo
-- quebra_em_subtarefas
-- reescrita_descricao
+- `SugestaoTarefa`
+- `Priorizacao`
+- `Resumo`
+- `QuebraEmSubtarefas`
+- `ReescritaDescricao`
 
-### 5. Funcionalidades Obrigatorias do MVP
+## 5. Funcionalidades Obrigatorias do MVP
 
-O MVP devera contemplar as seguintes funcionalidades principais:
+### Funcionalidades implementadas
 
+- Criacao de categorias
+- Listagem de categorias
 - Criacao de tarefas
 - Listagem de tarefas
-- Edicao de tarefas
-- Exclusao de tarefas
+- Edicao de tarefas via API
+- Exclusao de tarefas via API
 - Marcacao de tarefa como concluida
 - Definicao de prioridade
 - Definicao de prazo
 - Organizacao por categoria
-- Filtro por status, prioridade e categoria
-- Apoio de IA para sugerir tarefas a partir de um objetivo informado pelo usuario
-- Apoio de IA para priorizar tarefas
-- Apoio de IA para resumir ou melhorar a descricao de uma tarefa
-- Registro das interacoes com IA para posterior analise critica
+- Filtro por status
+- Filtro por prioridade
+- Filtro por categoria via API
+- Apoio de IA simulada para sugerir tarefas
+- Apoio de IA simulada para priorizar tarefas
+- Apoio de IA simulada para melhorar descricao
+- Registro das interacoes com IA
 
-### 6. Organizacao Inicial do Repositorio
+## 6. Organizacao  do Repositorio
 
-Estrutura planejada:
+### Estrutura implementada
 
 ```text
 mvp-gerenciador-tarefas-ia/
   README.md
-  docs/
-    planejamento.md
-    registro-interacoes-ia.md
-    analise-critica-ia.md
-  frontend/
-    src/
-      components/
-      pages/
-      services/
-      styles/
-  backend/
-    Controllers/
-    Models/
-    Services/
-    Repositories/
-    Program.cs
-    appsettings.json
+  README_TESTES.md
   .env.example
+  MvpGerenciadorTarefasIa.slnx
+  backend/
+    Models/
+      Domain.cs
+      Requests.cs
+    Repositories/
+      InMemoryTaskRepository.cs
+    Services/
+      TaskService.cs
+      AiSupportService.cs
+    wwwroot/
+      index.html
+      styles.css
+      app.js
+    Program.cs
+    backend.csproj
+  docs/
+    testes-automatizados.md
+  tests/
+    Program.cs
+    tests.csproj
 ```
 
-### 7. Cronograma de Desenvolvimento
+## 7. Rotas da API Implementadas
 
-| Etapa | Atividades                                                     | Prazo estimado |
-| ----- | -------------------------------------------------------------- | -------------- |
-| 1     | Planejamento, definicao das tecnologias e modelagem inicial    | Aula atual     |
-| 2     | Criacao do repositorio, estrutura base do front-end e back-end |
-| 3     | Implementacao de autenticacao e CRUD de tarefas                |
-| 4     | Implementacao de categorias, filtros e prioridades             |
-| 5     | Integracao com IA e registro das interacoes                    |
-| 6     | Testes, ajustes de interface e documentacao                    |
-| 7     | Finalizacao, deploy e preparacao da apresentacao               |
+### Sistema
 
-### 8. Registro Inicial de Uso de IA
+| Metodo | Rota | Descricao |
+| ------ | ---- | --------- |
+| GET | `/health` | Verifica se a API esta ativa |
 
-Durante o planejamento inicial, a IA foi utilizada como apoio para estruturar a arquitetura, sugerir tecnologias, organizar a modelagem das entidades e transformar os requisitos do trabalho em um plano de desenvolvimento.
+### Categorias
 
-Analise critica inicial: a IA ajudou a acelerar a organizacao das ideias e sugeriu uma estrutura coerente para o MVP. Entretanto, as decisoes foram revisadas por mim, considerando os requisitos reais definidos pela disciplina.
+| Metodo | Rota | Descricao |
+| ------ | ---- | --------- |
+| GET | `/api/categories` | Lista categorias cadastradas |
+| POST | `/api/categories` | Cria uma nova categoria |
+
+Exemplo de criacao de categoria:
+
+```json
+{
+  "nome": "Faculdade",
+  "cor": "#2563eb"
+}
+```
+
+### Tarefas
+
+| Metodo | Rota | Descricao |
+| ------ | ---- | --------- |
+| GET | `/api/tasks` | Lista tarefas |
+| GET | `/api/tasks?status=Concluida` | Filtra tarefas por status |
+| GET | `/api/tasks?priority=Alta` | Filtra tarefas por prioridade |
+| GET | `/api/tasks?categoryId={id}` | Filtra tarefas por categoria |
+| POST | `/api/tasks` | Cria uma tarefa |
+| PUT | `/api/tasks/{id}` | Atualiza uma tarefa |
+| PATCH | `/api/tasks/{id}/complete` | Marca uma tarefa como concluida |
+| DELETE | `/api/tasks/{id}` | Exclui uma tarefa |
+
+Exemplo de criacao de tarefa:
+
+```json
+{
+  "titulo": "Preparar apresentacao",
+  "descricao": "Montar roteiro e validar demo",
+  "categoriaId": null,
+  "prioridade": "Alta",
+  "dataLimite": "2026-06-20"
+}
+```
+
+### IA
+
+| Metodo | Rota | Descricao |
+| ------ | ---- | --------- |
+| POST | `/api/ai/suggest` | Sugere tarefas a partir de um objetivo |
+| POST | `/api/ai/prioritize` | Retorna tarefas priorizadas |
+| POST | `/api/ai/improve-description` | Melhora a descricao de uma tarefa |
+| GET | `/api/ai/interactions` | Lista interacoes registradas com IA |
+
+Exemplo de sugestao de tarefas:
+
+```json
+{
+  "objetivo": "Finalizar o MVP da disciplina"
+}
+```
+
+## 8. Cronograma de Desenvolvimento
+
+| Etapa | Atividades | Prazo |
+| ----- | ---------- | ----- |
+| 1 | Planejamento, definicao das tecnologias e modelagem inicial | Aula atual |
+| 2 | Criacao do repositorio, estrutura base do front-end e back-end | Concluido no MVP |
+| 3 | Implementacao de autenticacao e CRUD de tarefas | CRUD de tarefas implementado; autenticacao fica para evolucao futura |
+| 4 | Implementacao de categorias, filtros e prioridades | Concluido no MVP |
+| 5 | Integracao com IA e registro das interacoes | IA simulada e registro implementados |
+| 6 | Testes, ajustes de interface e documentacao | Testes e documentacao implementados |
+| 7 | Finalizacao, deploy e preparacao da apresentacao | Deploy fica para evolucao futura |
+
+## 9. Registro Inicial de Uso de IA
+
+Durante o planejamento inicial, a IA foi utilizada como apoio para estruturar a arquitetura, conhecer tecnologias, organizar a modelagem das entidades e transformar os requisitos do trabalho em um plano de desenvolvimento.
+
+Analise critica inicial: a IA ajudou a acelerar a organizacao das ideias e sugeriu uma estrutura consistente para o MVP. Entretanto, as decisoes foram revisadas por mim, considerando os requisitos reais definidos pela disciplina.
+
+## 10. Como Executar o Projeto
+
+Acesse a pasta do projeto:
+
+```powershell
+cd "Caminho onde se encontra o projeto"
+```
+
+Execute a API:
+
+```powershell
+dotnet run --project backend\backend.csproj --urls http://127.0.0.1:5280
+```
+
+Depois abra no navegador:
+
+```text
+http://127.0.0.1:5280
+```
+
+## 11. Como Executar os Testes
+
+Na raiz do projeto, execute:
+
+```powershell
+dotnet run --project tests\tests.csproj
+```
+
+Resultado esperado:
+
+```text
+[PASSOU] Unitario: valida titulo obrigatorio na criacao de tarefa
+[PASSOU] Integracao: cria categoria, cria tarefa, filtra e registra IA
+[PASSOU] Sistema E2E: API real cria e conclui tarefa por HTTP
+
+Resumo: 3 passou/passaram, 0 falhou/falharam.
+```
+
+Mais detalhes estao no arquivo `README_TESTES.md`.

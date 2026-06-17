@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f7fb;
+  color: #172033;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  border: 1px solid #c8d2e2;
+  border-radius: 6px;
+  font: inherit;
+  padding: 10px 12px;
+}
+
+button {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.shell {
+  display: grid;
+  gap: 18px;
+  margin: 0 auto;
+  max-width: 1040px;
+  padding: 28px;
+}
+
+.panel,
+.toolbar,
+.task-card {
+  background: white;
+  border: 1px solid #dce4ef;
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.heading p {
+  color: #607089;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.heading h1 {
+  font-size: 30px;
+  line-height: 1.18;
+  margin: 0 0 18px;
+}
+
+.row-form,
+.toolbar {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.task-form {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1.4fr 1.6fr .8fr .9fr .8fr auto;
+  margin-top: 12px;
+}
+
+.task-form textarea {
+  min-height: 44px;
+  resize: vertical;
+}
+
+.tasks {
+  display: grid;
+  gap: 12px;
+}
+
+.task-card {
+  display: grid;
+  gap: 8px;
+}
+
+.task-card header {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.task-card h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.meta {
+  color: #607089;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.badge {
+  background: #eef3f9;
+  border-radius: 999px;
+  padding: 4px 8px;
+}
+
+.ai-output {
+  line-height: 1.5;
+  margin: 12px 0 0;
+}
+
+@media (max-width: 820px) {
+  .task-form {
+    grid-template-columns: 1fr;
+  }
+
+  .shell {
+    padding: 16px;
+  }
+}
